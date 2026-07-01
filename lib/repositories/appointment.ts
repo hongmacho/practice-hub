@@ -13,20 +13,17 @@ export interface AppointmentInput {
 
 export async function getAllAppointments(clinicId: number, date?: string) {
   try {
-    let query: any;
     if (date) {
-      query = await db.query.appointments.findMany({
+      return await db.query.appointments.findMany({
         where: and(
           eq(appointments.clinicId, clinicId),
           eq(appointments.appointmentDate, date)
         ),
       });
-    } else {
-      query = await db.query.appointments.findMany({
-        where: eq(appointments.clinicId, clinicId),
-      });
     }
-    return query;
+    return await db.query.appointments.findMany({
+      where: eq(appointments.clinicId, clinicId),
+    });
   } catch (error) {
     console.error('Error fetching appointments:', error);
     throw new Error('예약 목록 조회에 실패했습니다.');

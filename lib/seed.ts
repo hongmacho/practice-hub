@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 export async function seedDatabase() {
   try {
     // Insert sample user (clinic admin/doctor)
-    const adminUser = await db
+    await db
       .insert(users)
       .values({
         email: 'doctor@clinic.kr',
